@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.1/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.1/resharper-host/local/Transient/ReSharperHost/v201/SolutionCaches/_cw4.-889514040.00" t="ExcludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="cw4.sln" t="IncludeFlat" />
+      <e p="cw5" t="IncludeRecursive">
+        <e p="Controllers" t="Include">
+          <e p="EnrollmentsController.cs" t="Include" />
+          <e p="StudentsController.cs" t="Include" />
+        </e>
+        <e p="DTOs" t="Include">
+          <e p="Requests" t="Include">
+            <e p="EnrollStudentRequests.cs" t="Include" />
+            <e p="PromoteStudentsRequest.cs" t="Include" />
+          </e>
+          <e p="Responses" t="Include">
+            <e p="EnrollStudentResponse.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Middleware" t="Include">
+          <e p="LoggingMiddleware.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="Enrollment.cs" t="Include" />
+          <e p="Student.cs" t="Include" />
+        </e>
+        <e p="Procedure_for_DB.txt" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="IStudentsDbService.cs" t="Include" />
+          <e p="SqlServerDbService.cs" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="apb.sqbpro" t="Include" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="cw5.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="cw5.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

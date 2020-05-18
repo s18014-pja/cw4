@@ -1,0 +1,31 @@
+create   procedure PromoteStudents @Name nvarchar(100), @Semester int
+as
+begin
+    set XACT_ABORT ON;
+    begin transaction
+        declare @IdStudy int = (select IdStudy from Studies where name=@Name)
+        if @IdStudy IS NULL
+        begin
+            THROW 51000, 'Study name does not exist.', 1;
+        end
+
+        declare @IdEnrollment int = (select IdEnrollment from Enrollment where IdStudy=@IdStudy and Semester=@Semester)
+        if @IdEnrollment IS NULL
+        begin
+            THROW 51000, 'There is no such semester for this study.', 1;
+        end
+
+        declare @IdEnrollmentToPromoteTo int = (select IdEnrollment from Enrollment where IdStudy=@IdStudy and Semester=@Semester + 1)
+        if @IdEnrollmentToPromoteTo IS NULL
+        begin
+            set @IdEnrollmentToPromoteTo = (select max(IdEnrollment) from Enrollment) + 1
+            insert into Enrollment(IdEnrollment, Semester, IdStudy, StartDate) VALUES(@IdEnrollmentToPromoteTo, @semester + 1, @idStudy, CURRENT_TIMESTAMP)
+        end
+
+        update Student set IdEnrollment=@IdEnrollmentToPromoteTo where IdEnrollment=@IdEnrollment;
+        select * from Enrollment where IdEnrollment=@IdEnrollmentToPromoteTo
+    commit;
+end;
+go
+
+
