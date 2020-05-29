@@ -59,7 +59,8 @@ namespace cw5.Services
                         LastName = dr["LastName"].ToString(),
                         BirthDate = Convert.ToDateTime(dr["BirthDate"].ToString()),
                         IndexNumber = dr["IndexNumber"].ToString(),
-                        IdEnrollment = Convert.ToInt32(dr["IdEnrollment"])
+                        IdEnrollment = Convert.ToInt32(dr["IdEnrollment"]),
+                        Password = dr["Password"].ToString()
                     };
                     return st;
                 }

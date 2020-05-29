@@ -1,12 +1,17 @@
 using System;
+using System.Text;
+using cw5.Handlers;
 using cw5.Middleware;
 using cw5.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace cw5
 {
@@ -23,6 +28,25 @@ namespace cw5
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IStudentsDbService, SqlServerDbService>();
+            
+            /*// Cw 7 zad 1
+            services.AddAuthentication("AuthenticationBasic")
+                    .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("AuthenticationBasic", null);*/
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = "s18014",
+                        ValidAudience = "Students",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecretKey"]))
+                    };
+                });
+            
             services.AddControllers();
         }
 
@@ -36,9 +60,10 @@ namespace cw5
 
             // app.UseHttpsRedirection();
 
-            app.UseMiddleware<LoggingMiddleware>();
+            // Cw 6
+            // app.UseMiddleware<LoggingMiddleware>();
             
-            app.Use(async (context, next) =>
+            /*app.Use(async (context, next) =>
             {
                 if (!context.Request.Headers.ContainsKey("Index"))
                 {
@@ -55,10 +80,12 @@ namespace cw5
                 }
 
                 await next();
-            });
+            });*/
 
             app.UseRouting();
-
+            
+            app.UseAuthentication();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

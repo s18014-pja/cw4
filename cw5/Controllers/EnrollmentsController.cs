@@ -1,6 +1,7 @@
 using System;
 using cw5.Services;
 using cw5.DTOs.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cw5.Controllers
@@ -17,6 +18,7 @@ namespace cw5.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "employee")]
         public IActionResult EnrollStudent(EnrollStudentRequests request)
         {
             var response = _dbService.EnrollStudent(request);
@@ -24,6 +26,7 @@ namespace cw5.Controllers
         }
         
         [HttpPost("{promotions}")]
+        [Authorize(Roles = "employee")]
         // public IActionResult PromoteStudents(PromoteStudentsRequest request)
         public IActionResult PromoteStudents(string promotions, PromoteStudentsRequest request)
         {
