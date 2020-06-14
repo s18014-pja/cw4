@@ -8,7 +8,8 @@ using cw5.Models;
 
 namespace cw5.Services
 {
-    public class SqlServerDbService : IStudentsDbService
+    // !!! Zakomentowane, żeby nie krzyczał : IStudentsDbService
+    public class SqlServerDbService // : IStudentsDbService
     {
         private static List<Student> _students = new List<Student>();
         private const string ConnectionString = "Server=localhost;Database=APBD;User Id=SA;Password=Trelek_123";
@@ -88,7 +89,7 @@ namespace cw5.Services
                     enrollment.StartDate = DateTime.Parse(dr["StartDate"].ToString()!);
                 }
             }
-            return null;
+            return enrollment;
         }
 
         public Enrollment EnrollStudent(EnrollStudentRequests request)

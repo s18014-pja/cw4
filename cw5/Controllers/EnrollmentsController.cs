@@ -18,7 +18,7 @@ namespace cw5.Controllers
         }
         
         [HttpPost]
-        [Authorize(Roles = "employee")]
+        // [Authorize(Roles = "employee")]
         public IActionResult EnrollStudent(EnrollStudentRequests request)
         {
             var response = _dbService.EnrollStudent(request);
@@ -26,8 +26,7 @@ namespace cw5.Controllers
         }
         
         [HttpPost("{promotions}")]
-        [Authorize(Roles = "employee")]
-        // public IActionResult PromoteStudents(PromoteStudentsRequest request)
+        // [Authorize(Roles = "employee")]
         public IActionResult PromoteStudents(string promotions, PromoteStudentsRequest request)
         {
             if (!promotions.Equals("promotions")) return Ok(BadRequest("Błędny parametr"));

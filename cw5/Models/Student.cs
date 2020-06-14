@@ -1,14 +1,17 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace cw5.Models
 {
-    public class Student
+    public partial class Student
     {
-        public int IdEnrollment { get; set; }
+        public string IndexNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string IndexNumber { get; set; }
         public DateTime BirthDate { get; set; }
+        public int IdEnrollment { get; set; }
         public string Password { get; set; }
+
+        public virtual Enrollment IdEnrollmentNavigation { get; set; }
     }
 }

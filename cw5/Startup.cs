@@ -27,12 +27,14 @@ namespace cw5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IStudentsDbService, SqlServerDbService>();
+            // services.AddSingleton<IStudentsDbService, SqlServerDbService>();
+            services.AddSingleton<IStudentsDbService, EFSqlServerDbService>();
             
             /*// Cw 7 zad 1
             services.AddAuthentication("AuthenticationBasic")
                     .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("AuthenticationBasic", null);*/
 
+            // Cw 7 zad 2
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

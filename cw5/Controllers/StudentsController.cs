@@ -29,8 +29,9 @@ namespace cw5.Controllers
         [HttpPost]
         public IActionResult Login(LoginRequest request)
         {
-            
-            Student student = _dbService.GetStudent(request.Login);
+            Console.WriteLine(request.Login);
+            Console.WriteLine(request.Haslo);
+            var student = _dbService.GetStudent(request.Login);
             
             var claims = new[]
             {
@@ -60,6 +61,7 @@ namespace cw5.Controllers
         }
         
         [HttpGet]
+        [Authorize]
         public IActionResult GetStudents()
         {
             return Ok(_dbService.GetStudents());
@@ -72,10 +74,25 @@ namespace cw5.Controllers
             return response == null ? Ok(BadRequest("Błędny parametr")) : Ok(response);
         }
         
-        [HttpGet("{indexNumber}/{enrollment}")]
+        /*[HttpGet("{indexNumber}/{enrollment}")]
         public IActionResult GetStudent(string indexNumber, string enrollment)
         {
             return enrollment.Equals("enrollment") ? Ok(_dbService.GetEnrollment(indexNumber)) : Ok(BadRequest("Błędny parametr"));
+        }*/
+        
+        [HttpDelete("{indexNumber}")]
+        public IActionResult DeleteStudent(string indexNumber)
+        {
+            _dbService.DeleteStudent(indexNumber);
+            return Ok("Deleted");
+        }
+        
+        [HttpPost("{indexNumber}/{password}")]
+        public IActionResult ChangePassword(string indexNumber, string password, ChangePasswordRequests request)
+        {
+            if (!password.Equals("password")) return Ok(BadRequest("Błędny parametr"));
+            var response = _dbService.ChangePassword(indexNumber, request);
+            return response == true ? Ok("Password changed") : Ok(BadRequest("Wrong old password"));
         }
     }
 }

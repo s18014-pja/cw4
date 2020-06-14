@@ -8,7 +8,9 @@ namespace cw5.Services
     {
         public IEnumerable<Student> GetStudents();
         public Student GetStudent(string indexNumber);
-        public Enrollment GetEnrollment(string indexNumber);
+        public void DeleteStudent(string indexNumber);
+        // public Enrollment GetEnrollment(string indexNumber);
+        public bool ChangePassword(string indexNumber, ChangePasswordRequests request);
         public Enrollment EnrollStudent(EnrollStudentRequests request);
         public Enrollment PromoteStudents(PromoteStudentsRequest request);
 
